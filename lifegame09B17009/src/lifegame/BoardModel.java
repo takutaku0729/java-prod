@@ -79,16 +79,17 @@ public class BoardModel {
 		for(int y=0; y<rows; y++) {
 			for(int x=0; x<cols; x++) {
 				if(copycells[y][x] == true) {
-					if(this.check(cells,y,x)==2||this.check(cells,y,x)==3) {
+					if(this.check(copycells,y,x)<2 || this.check(copycells,y,x)>3) {
 						cells[y][x]=false;
 					}
 				}else {
-					if(3==this.check(cells,y,x)) {
+					if(3==this.check(copycells,y,x)) {
 						cells[y][x]=true;
 					}
 				}
 			}
 		}
+		this.fireUpdate();
 	}
 	
 	private void copy(boolean[][] original,boolean[][] tmp) {
@@ -100,14 +101,15 @@ public class BoardModel {
 	private int check(boolean[][] checkcells,int y,int x) {
 		int count=0;
 		for(int i=-1; i<2; i++) {
-			for(int j=-1; j<2; j++) {
-				if(i==0 && j==0 && checkcells[y+i][x+j]==true) {
-					count++;
+			if(0<=y+i && y+i<rows) {
+				for(int j=-1; j<2; j++) {
+					if(0<=x+j && x+j<cols && !(i==0 && j==0) && checkcells[y+i][x+j]==true) {
+						count++;
+					}
 				}
 			}
 		}
 		return count;
-		
 	}
 
 }
