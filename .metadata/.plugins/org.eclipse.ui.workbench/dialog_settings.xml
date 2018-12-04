@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="WorkbenchPreferenceDialogSettings">
-		<item value="-146" key="DIALOG_X_ORIGIN"/>
+		<item value="9" key="DIALOG_X_ORIGIN"/>
 		<item value="33" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="org.eclipse.ui.internal.QuickAccess">
@@ -28,6 +28,7 @@
 		<item value="true" key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID"/>
 		<item value="true" key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID"/>
 		<list key="WizardZipFileResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\takut\Documents\大学\09B17009.zip"/>
 			<item value="/home/exp/exp7/t-ise/pro-d2018/lifegame/lifegame-09B17009.zip"/>
 		</list>
 	</section>

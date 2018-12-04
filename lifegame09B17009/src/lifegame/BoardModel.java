@@ -7,12 +7,13 @@ public class BoardModel {
 	private int rows;
 	private boolean[][] cells;
 	private ArrayList<BoardListener>listeners;
+	private ArrayList<boolean[][]> history;
 	
 	public BoardModel(int c, int r) {
 		cols = c;
 		rows = r;
 		cells = new boolean[rows][cols];
-		
+		history = new ArrayList<boolean[][]>();
 		listeners = new ArrayList<BoardListener>();
 		
 	}
@@ -26,8 +27,8 @@ public class BoardModel {
 	}
 	
 	public void printForDebug() {
-		for(int i=0;i<cols;i++) {
-			for(int j=0;j<rows;j++) {
+		for(int i=0;i<rows;i++) {
+			for(int j=0;j<cols;j++) {
 				if(cells[i][j] == false) {
 					System.out.print(".");
 				}else if(cells[i][j] == true) {
@@ -74,7 +75,13 @@ public class BoardModel {
 	
 	public void next() {
 		boolean[][] copycells = new boolean[rows][cols];
+		
 		this.copy(cells, copycells);
+		
+	    history.add(copycells);
+		if(history.size()>32) {
+			history.remove(0);
+		}
 		
 		for(int y=0; y<rows; y++) {
 			for(int x=0; x<cols; x++) {
@@ -90,6 +97,21 @@ public class BoardModel {
 			}
 		}
 		this.fireUpdate();
+	}
+	
+	public void undo() {
+		int n = history.size();
+		this.copy(history.get(n-1), cells);
+		history.remove(n-1);
+		this.fireUpdate();
+	}
+	
+	public boolean isUndoable() {
+		if(history.size() == 0) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 	
 	private void copy(boolean[][] original,boolean[][] tmp) {
@@ -111,5 +133,8 @@ public class BoardModel {
 		}
 		return count;
 	}
-
+	
+	public boolean isAlive(int x, int y) {
+		return cells[y][x];
+	}
 }

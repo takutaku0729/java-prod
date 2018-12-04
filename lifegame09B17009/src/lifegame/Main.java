@@ -1,7 +1,20 @@
 package lifegame;
 
-public class Main {
+import javax.swing.SwingUtilities;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import java.awt.Dimension;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+public class Main implements Runnable {
 	public static void main(String[] args) {
+			SwingUtilities.invokeLater(new Main());
+	}
+	
+	public void run()
+	{
 		BoardModel model = new BoardModel(10,10);
 		model.addListener(new ModelPrinter());
 		model.changeCellState(1, 1);
@@ -9,12 +22,35 @@ public class Main {
 		model.changeCellState(0, 3);
 		model.changeCellState(1, 3);
 		model.changeCellState(2, 3);
-		model.changeCellState(4, 4);
-		model.changeCellState(4, 4);
-	
-		for(int i=0;i<12;i++) {
-			model.next();
-		}
+		
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		JPanel base = new JPanel();
+		frame.setContentPane(base);
+		base.setPreferredSize(new Dimension(400,300));
+		frame.setMinimumSize(new Dimension(300,200));
+		frame.setTitle("Lifegame");
+		
+		base.setLayout(new BorderLayout());
+		BoardView view = new BoardView(model);
+		base.add(view, BorderLayout.CENTER);
+		
+		JPanel buttonPanel = new JPanel();
+		base.add(buttonPanel, BorderLayout.SOUTH);
+		buttonPanel.setLayout(new FlowLayout());
+		
+		JButton undobutton = new JButton("Undo");
+		undobutton.addActionListener(new Undo(model,view));
+		buttonPanel.add(undobutton);
+		undobutton.setEnabled(false);
+		model.addListener(new Undoable(undobutton));
+		
+		JButton nextbutton = new JButton("Next");
+		nextbutton.addActionListener(new Next(model,view));
+		buttonPanel.add(nextbutton);
+		
+		frame.pack();
+		frame.setVisible(true);
 	}
-	
 }

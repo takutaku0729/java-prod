@@ -1,0 +1,14 @@
+package lifegame;
+import java.awt.event.*;
+
+public class Undo implements ActionListener {
+
+	BoardModel getmodel;
+	public Undo(BoardModel model) {
+		getmodel = model;
+	}
+	public void actionPerformed(ActionEvent e) {
+		getmodel.undo();
+	}
+
+}

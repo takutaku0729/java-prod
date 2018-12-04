@@ -1,0 +1,13 @@
+package lifegame;
+
+import java.awt.event.ActionEvent;
+
+public class Next implements ActionListener{
+	BoardModel getmodel;
+	public Next(BoardModel model) {
+		getmodel = model;
+	}
+	public void actionPerformed(ActionEvent e) {
+		getmodel.undo();
+	}
+}

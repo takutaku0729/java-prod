@@ -1,0 +1,12 @@
+package lifegame;
+import javax.swing.JButton;
+
+public class Undoable implements BoardListener {
+	public Undoable(JButton tmp){
+		JButton undo = tmp;
+	}
+	public void updated(BoardModel m) {
+		undo.setEnabled(m.isUndoable());
+	}
+
+}
