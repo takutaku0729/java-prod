@@ -20,25 +20,25 @@ public class BoardView extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		
-		int xlen = this.getWidth();
-		int ylen = this.getHeight();
+		int xlen = this.getWidth()+4;
+		int ylen = this.getHeight()+4;
 		int cellsize;
 		
 		if((xlen/rows*cols)<ylen) {	//‰¡‚¢‚Á‚Ï‚¢
 			cellsize = xlen/rows;
 			for(int i = 0; i<(rows+1); i++) {//cü
-				g.drawLine(cellsize*i, (ylen-cellsize*cols)/2,cellsize*i, cellsize*cols+(ylen-cellsize*cols)/2);
+				g.drawLine(cellsize*i+1, (ylen-cellsize*cols)/2+1,cellsize*i+1, cellsize*cols+(ylen-cellsize*cols)/2+1);
 			}
 			for(int i = 0; i<(cols+1); i++) { //‰¡ü
-				g.drawLine(0, cellsize*i+(ylen-cellsize*cols)/2, cellsize*rows,cellsize*i+(ylen-cellsize*cols)/2);
+				g.drawLine(1, cellsize*i+(ylen-cellsize*cols)/2+1, cellsize*rows+1,cellsize*i+(ylen-cellsize*cols)/2+1);
 			}
 		}else {
 			cellsize = ylen/cols; //c‚¢‚Á‚Ï‚¢
 			for(int i = 0; i<(rows+1); i++) {//cü
-				g.drawLine(cellsize*i+(xlen-cellsize*rows)/2, 0, cellsize*i+(xlen-cellsize*rows)/2, cellsize*cols);
+				g.drawLine(cellsize*i+(xlen-cellsize*rows)/2+1, 1, cellsize*i+(xlen-cellsize*rows)/2+1, cellsize*cols+1);
 			}
 			for(int i = 0; i<(cols+1); i++) { //‰¡ü
-				g.drawLine((xlen-cellsize*rows)/2, cellsize*i, cellsize*rows+(xlen-cellsize*rows)/2, cellsize*i);
+				g.drawLine((xlen-cellsize*rows)/2+1, cellsize*i+1, cellsize*rows+(xlen-cellsize*rows)/2+1, cellsize*i+1);
 			}
 		}
 		

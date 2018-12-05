@@ -22,28 +22,23 @@ public class BoardView extends JPanel {
 		
 		int xlen = this.getWidth();
 		int ylen = this.getHeight();
-		int cellsize;
-		
-		if((xlen/rows*cols)<ylen) {	//‰¡‚¢‚Á‚Ï‚¢
-			cellsize = xlen/rows;
-			for(int i = 0; i<(rows+1); i++) {//cü
-				g.drawLine(cellsize*i, (ylen-cellsize*cols)/2,cellsize*i, cellsize*cols+(ylen-cellsize*cols)/2);
+		int centeringx = (xlen-ylen)/2;
+		int centeringy = (ylen-xlen)/2;
+		if(xlen >= ylen) {
+			for(int i = 0; i<(rows+1); i++) {
+				g.drawLine((ylen/rows)*i+centeringx, 0, (ylen/rows)*i+centeringx, (ylen/cols)*cols);
 			}
-			for(int i = 0; i<(cols+1); i++) { //‰¡ü
-				g.drawLine(0, cellsize*i+(ylen-cellsize*cols)/2, cellsize*rows,cellsize*i+(ylen-cellsize*cols)/2);
+			for(int i = 0; i<(cols+1); i++) {
+				g.drawLine(centeringx, (ylen/cols)*i, (ylen/rows)*rows+centeringx,(ylen/cols)*i);
 			}
 		}else {
-			cellsize = ylen/cols; //c‚¢‚Á‚Ï‚¢
-			for(int i = 0; i<(rows+1); i++) {//cü
-				g.drawLine(cellsize*i+(xlen-cellsize*rows)/2, 0, cellsize*i+(xlen-cellsize*rows)/2, cellsize*cols);
+			for(int i = 0; i<11; i++) {
+				g.drawLine((xlen/rows)*i, centeringy, (xlen/rows)*i, (xlen/cols)*cols+centeringy);
 			}
-			for(int i = 0; i<(cols+1); i++) { //‰¡ü
-				g.drawLine((xlen-cellsize*rows)/2, cellsize*i, cellsize*rows+(xlen-cellsize*rows)/2, cellsize*i);
+			for(int i = 0; i<11; i++) {
+				g.drawLine(0, (xlen/cols)*i+centeringy, (xlen/rows)*rows,(xlen/cols)*i+centeringy);
 			}
 		}
-		
-		/*
-		
 		for(int i = 0; i < cols; i++) {
 			for(int j = 0; j<rows; j++) {
 				if(view.isAlive(i,j)==true) {
@@ -56,7 +51,6 @@ public class BoardView extends JPanel {
 				}
 			}
 		}
-		*/
 	}
 	
 }
