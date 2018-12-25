@@ -9,8 +9,6 @@ import java.awt.event.MouseMotionListener;
 public class BoardView extends JPanel implements BoardListener, MouseListener, MouseMotionListener {
 	BoardModel model;
 	int cols,rows;
-	int changex;
-	int changey;
 	/**
 	 * 
 	 */
@@ -69,114 +67,7 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		int x = e.getX();
-		int y = e.getY();
-		int prex = changex;
-		int prey = changey;
-		int xlen = this.getWidth()-2;
-		int ylen = this.getHeight()-2;
-		int cellsize;
-		if((xlen/cols*rows)<ylen){ //yokoippai
-			cellsize = xlen/cols;
-			for(changex = 0; changex < cols; changex++) {
-				if(1+cellsize*changex < x && x < 1 + cellsize*(changex+1)) {
-					break;
-				}
-			}
-			for(changey = 0; changey < rows; changey++) {
-				if(1 + changey*cellsize + (ylen-cellsize*rows)/2 < y &&
-						y < 1 + (changey+1)*cellsize + (ylen-cellsize*rows)/2) {
-					break;
-				}
-			}
-			if(prex != changex || prey != changey) {
-				if(changey == rows || changex == cols) {
-					return;
-				}
-				model.changeCellState(changex, changey);
-				this.repaint();
-			}
-		}else {
-			cellsize = ylen/rows;
-			for(changex = 0; changex < cols; changex++) {
-				if(1 + cellsize*changex + (xlen-cellsize*cols)/2 < x &&
-						x < 1 + cellsize*(changex+1) + (xlen-cellsize*cols)/2) {
-					break;
-				}
-			}
-			for(changey = 0; changey < rows; changey++) {
-				if(1 + changey*cellsize < y &&
-						y < 1 + (changey+1)*cellsize) {
-					break;
-				}
-			}
-			if(prex != changex || prey != changey) {
-				if(changey == rows || changex == cols) {
-					return;
-				}
-				model.changeCellState(changex, changey);
-				this.repaint();
-			}
-		}
-		
-	}
-
-	@Override
-	public void updated(BoardModel m) {
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		int pushx = e.getX();
-		int pushy = e.getY();
-		int xlen = this.getWidth()-2;
-		int ylen = this.getHeight()-2;
-		int cellsize;
-		if((xlen/cols*rows)<ylen){ //yokoippai
-			cellsize = xlen/cols;
-			for(changex = 0; changex < cols; changex++) {
-				if(1+cellsize*changex < pushx && pushx < 1 + cellsize*(changex+1)) {
-					break;
-				}
-				if(changex == cols) {
-					return;
-				}
-			}
-			for(changey = 0; changey < rows; changey++) {
-				if(1 + changey*cellsize + (ylen-cellsize*rows)/2 < pushy &&
-						pushy < 1 + (changey+1)*cellsize + (ylen-cellsize*rows)/2) {
-					break;
-				}
-				if(changey == rows) {
-					return;
-				}
-			}
-			model.changeCellState(changex, changey);
-			this.repaint();
-		}else {
-			cellsize = ylen/rows;
-			for(changex = 0; changex < cols; changex++) {
-				if(1 + cellsize*changex + (xlen-cellsize*cols)/2 < pushx &&
-						pushx < 1 + cellsize*(changex+1) + (xlen-cellsize*cols)/2) {
-					break;
-				}
-				if(changex == cols) {
-					return;
-				}
-			}
-			for(changey = 0; changey < rows; changey++) {
-				if(1 + changey*cellsize < pushy &&
-						pushy < 1 + (changey+1)*cellsize) {
-					break;
-				}
-				if(changey == rows) {
-					return;
-				}
-			}
-			model.changeCellState(changex, changey);
-			this.repaint();
-		}
+		// TODO 自動生成されたメソッド・スタブ
 		
 	}
 
@@ -189,7 +80,48 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 
 
 	@Override
+	public void updated(BoardModel m) {
+		
+	}
+
+
+	@Override
 	public void mouseClicked(MouseEvent e) {
+		int x = e.getX();
+		int y = e.getY();
+		int changex;
+		int changey;
+		int xlen = this.getWidth()-2;
+		int ylen = this.getHeight()-2;
+		int cellsize;
+		if((xlen/cols*rows)<ylen){ //yokoippai
+			cellsize = xlen/cols;
+			for(changex = 0; changex < cols; changex++) {
+				if(1+cellsize*changex < x && x < 2 + cellsize*(changex+1)) {
+					break;
+				}
+				if(changex == cols-1) {
+					return;
+				}
+			}
+			for(changey = 0; changey < rows; changey++) {
+				if(1 + changey*cellsize + (ylen-cellsize*rows)/2 < y &&
+						y < 2 + (changey+1)*cellsize + (ylen-cellsize*rows)/2) {
+					break;
+				}
+				if(changey == rows-1) {
+					return;
+				}
+			}
+			model.changeCellState(changex, changey);
+			this.updated(model);
+		}
+		
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}

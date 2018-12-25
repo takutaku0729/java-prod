@@ -1,8 +1,0 @@
-package lifegame;
-import java.awt.event.*;
-
-public class ModelButton implements ActionListener{
-	@Override
-	public void actionPerformed(ActionEvent e) {
-	}
-}

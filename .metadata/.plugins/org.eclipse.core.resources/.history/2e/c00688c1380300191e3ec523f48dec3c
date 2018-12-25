@@ -45,7 +45,6 @@ public class Main implements Runnable {
 		
 		JButton newgame = new JButton("NewGame");
 		newgame.addActionListener(new NewGame());
-		buttonPanel.add(newgame);
 		
 		frame.pack();
 		frame.setVisible(true);

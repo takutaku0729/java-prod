@@ -1,6 +1,0 @@
-package lifegame;
-import java.awt.event.*;
-
-public class BoardButton implements ActionListener {
-	
-}

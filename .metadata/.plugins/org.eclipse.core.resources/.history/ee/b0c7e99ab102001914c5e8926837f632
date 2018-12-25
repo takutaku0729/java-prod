@@ -1,0 +1,139 @@
+package lifegame;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+
+public class BoardView extends JPanel implements BoardListener, MouseListener, MouseMotionListener {
+	BoardModel model;
+	int cols,rows;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public BoardView(BoardModel board) {
+		model = board;
+		cols = model.getCols();
+		rows = model.getRows();
+		this.addMouseListener(this);
+		this.addMouseMotionListener(this);
+
+	}
+	
+
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		
+		int xlen = this.getWidth()-2;
+		int ylen = this.getHeight()-2;
+		int cellsize;
+		
+		if((xlen/cols*rows)<ylen) {	//横いっぱい
+			cellsize = xlen/cols;
+			for(int i = 0; i<(cols+1); i++) {//縦線
+				g.drawLine(cellsize*i+1, (ylen-cellsize*rows)/2,cellsize*i+1, cellsize*rows+(ylen-cellsize*rows)/2);
+			}
+			for(int i = 0; i<(rows+1); i++) { //横線
+				g.drawLine(1, cellsize*i+(ylen-cellsize*rows)/2, cellsize*cols+1,cellsize*i+(ylen-cellsize*rows)/2);
+			}
+		}else {
+			cellsize = ylen/rows; //縦いっぱい
+			for(int i = 0; i<(cols+1); i++) {//縦線
+				g.drawLine(cellsize*i+(xlen-cellsize*cols)/2, 1, cellsize*i+(xlen-cellsize*cols)/2, cellsize*rows+1);
+			}
+			for(int i = 0; i<(rows+1); i++) { //横線
+				g.drawLine((xlen-cellsize*cols)/2, cellsize*i+1, cellsize*cols+(xlen-cellsize*cols)/2, cellsize*i+1);
+			}
+		}
+		
+		for(int i = 0; i < cols; i++) {
+			for(int j = 0; j<rows; j++) {
+				if(model.isAlive(i,j)==true) {
+					if((xlen/cols*rows)<ylen) {
+						g.fillRect(cellsize*i+1, (ylen-cellsize*rows)/2+cellsize*j, cellsize, cellsize);
+					}
+					else {
+						g.fillRect(cellsize*i+(xlen-cellsize*cols)/2, cellsize*j+1, cellsize, cellsize);
+					}
+				}
+			}
+		}
+	}
+
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
+
+	@Override
+	public void updated(BoardModel m) {
+		
+	}
+
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		int x = e.getX();
+		int y = e.getY();
+		int changex;
+		int changey;
+		int xlen = this.getWidth()-2;
+		int ylen = this.getHeight()-2;
+		int cellsize;
+		if((xlen/cols*rows)<ylen){ //yokoippai
+			cellsize = xlen/cols;
+			for(changex = 0; xlen < cols; changex++) {
+				if(1+cellsize*changex < x && x < 2+cellsize*(changex+1)) {
+					break;
+				}
+			}
+			for(changey = 0; ylen < rows; changey++) {
+				
+			}
+		}
+		
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+	
+}

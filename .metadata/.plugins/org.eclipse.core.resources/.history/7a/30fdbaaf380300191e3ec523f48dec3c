@@ -1,0 +1,12 @@
+package lifegame;
+import java.awt.event.*;
+
+public class NewGame implements ActionListener{
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		
+	}
+
+}
