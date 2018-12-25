@@ -76,6 +76,7 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 		int xlen = this.getWidth()-2;
 		int ylen = this.getHeight()-2;
 		int cellsize;
+		
 		if((xlen/cols*rows)<ylen){ //yokoippai
 			cellsize = xlen/cols;
 			for(changex = 0; changex < cols; changex++) {
@@ -93,6 +94,7 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 				if(changey == rows || changex == cols) {
 					return;
 				}
+				model.addhistory();
 				model.changeCellState(changex, changey);
 				this.repaint();
 			}
@@ -114,6 +116,7 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 				if(changey == rows || changex == cols) {
 					return;
 				}
+				model.addhistory();
 				model.changeCellState(changex, changey);
 				this.repaint();
 			}
@@ -133,6 +136,7 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 		int xlen = this.getWidth()-2;
 		int ylen = this.getHeight()-2;
 		int cellsize;
+		
 		if((xlen/cols*rows)<ylen){ //yokoippai
 			cellsize = xlen/cols;
 			for(changex = 0; changex < cols; changex++) {
@@ -152,6 +156,7 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 					return;
 				}
 			}
+			model.addhistory();
 			model.changeCellState(changex, changey);
 			this.repaint();
 		}else {
@@ -174,6 +179,7 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 					return;
 				}
 			}
+			model.addhistory();
 			model.changeCellState(changex, changey);
 			this.repaint();
 		}

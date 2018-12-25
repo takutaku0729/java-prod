@@ -76,12 +76,7 @@ public class BoardModel {
 	public void next() {
 		boolean[][] copycells = new boolean[rows][cols];
 		
-		this.copy(cells, copycells);
-		
-	    history.add(copycells);
-		if(history.size()>32) {
-			history.remove(0);
-		}
+		this.addhistory();
 		
 		for(int y=0; y<rows; y++) {
 			for(int x=0; x<cols; x++) {
@@ -117,6 +112,17 @@ public class BoardModel {
 	private void copy(boolean[][] original,boolean[][] tmp) {
 		for(int i=0; i< original.length; i++) {
 			System.arraycopy(original[i], 0, tmp[i], 0, original[i].length);
+		}
+	}
+	
+	public void addhistory() {
+		boolean[][] tmp = new boolean[rows][cols];
+		for(int i=0; i< cells.length; i++) {
+			System.arraycopy(cells[i], 0, tmp[i], 0, cells[i].length);
+		}
+	    history.add(tmp);
+		if(history.size()>32) {
+			history.remove(0);
 		}
 	}
 	
