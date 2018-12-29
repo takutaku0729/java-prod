@@ -75,6 +75,7 @@ public class BoardModel {
 	
 	public void next() {
 		boolean[][] copycells = new boolean[rows][cols];
+		this.copy(cells, copycells);
 		
 		this.addhistory();
 		

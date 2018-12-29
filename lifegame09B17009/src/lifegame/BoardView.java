@@ -134,8 +134,8 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 	public void mousePressed(MouseEvent e) {
 		int pushx = e.getX();
 		int pushy = e.getY();
-		int xlen = this.getWidth()-2;
-		int ylen = this.getHeight()-2;
+		int xlen = this.getWidth()-1;
+		int ylen = this.getHeight()-1;
 		int cellsize;
 		
 		if((xlen/cols*rows)<ylen){ //yokoippai
@@ -144,7 +144,7 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 				if(cellsize*changex < pushx && pushx <cellsize*(changex+1)) {
 					break;
 				}
-				if(changex == cols) {
+				if(changex == cols-1) {
 					return;
 				}
 			}
@@ -153,7 +153,7 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 						pushy <(changey+1)*cellsize + (ylen-cellsize*rows)/2) {
 					break;
 				}
-				if(changey == rows) {
+				if(changey == rows-1) {
 					return;
 				}
 			}
@@ -167,7 +167,7 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 						pushx <cellsize*(changex+1) + (xlen-cellsize*cols)/2) {
 					break;
 				}
-				if(changex == cols) {
+				if(changex == cols-1) {
 					return;
 				}
 			}
@@ -176,7 +176,7 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 						pushy <(changey+1)*cellsize) {
 					break;
 				}
-				if(changey == rows) {
+				if(changey == rows-1) {
 					return;
 				}
 			}
