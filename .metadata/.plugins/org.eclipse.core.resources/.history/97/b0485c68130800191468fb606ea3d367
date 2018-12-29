@@ -172,7 +172,7 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 				}
 			}
 			for(changey = 0; changey < rows; changey++) {
-				if(changey*cellsize < pushy &&
+				if(1 + changey*cellsize < pushy &&
 						pushy <(changey+1)*cellsize) {
 					break;
 				}

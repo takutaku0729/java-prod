@@ -57,10 +57,10 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 			for(int j = 0; j<rows; j++) {
 				if(model.isAlive(i,j)==true) {
 					if((xlen/cols*rows)<ylen) {
-						g.fillRect(cellsize*i, (ylen-cellsize*rows)/2+cellsize*j, cellsize, cellsize);
+						g.fillRect(cellsize*i+1, (ylen-cellsize*rows)/2+cellsize*j+1, cellsize-1, cellsize-1);
 					}
 					else {
-						g.fillRect(cellsize*i+(xlen-cellsize*cols)/2, cellsize*j, cellsize, cellsize);
+						g.fillRect(cellsize*i+(xlen-cellsize*cols)/2+1, cellsize*j+1, cellsize-1, cellsize-1);
 					}
 				}
 			}
@@ -74,20 +74,20 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 		int y = e.getY();
 		int prex = changex;
 		int prey = changey;
-		int xlen = this.getWidth()-1;
-		int ylen = this.getHeight()-1;
+		int xlen = this.getWidth()-2;
+		int ylen = this.getHeight()-2;
 		int cellsize;
 		
 		if((xlen/cols*rows)<ylen){ //yokoippai
 			cellsize = xlen/cols;
 			for(changex = 0; changex < cols; changex++) {
-				if(cellsize*changex < x && x < cellsize*(changex+1)) {
+				if(1+cellsize*changex < x && x < 1 + cellsize*(changex+1)) {
 					break;
 				}
 			}
 			for(changey = 0; changey < rows; changey++) {
-				if(changey*cellsize + (ylen-cellsize*rows)/2 < y &&
-						y <(changey+1)*cellsize + (ylen-cellsize*rows)/2) {
+				if(1 + changey*cellsize + (ylen-cellsize*rows)/2 < y &&
+						y < 1 + (changey+1)*cellsize + (ylen-cellsize*rows)/2) {
 					break;
 				}
 			}
@@ -102,14 +102,14 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 		}else {
 			cellsize = ylen/rows;
 			for(changex = 0; changex < cols; changex++) {
-				if(cellsize*changex + (xlen-cellsize*cols)/2 < x &&
-						x <cellsize*(changex+1) + (xlen-cellsize*cols)/2) {
+				if(1 + cellsize*changex + (xlen-cellsize*cols)/2 < x &&
+						x < 1 + cellsize*(changex+1) + (xlen-cellsize*cols)/2) {
 					break;
 				}
 			}
 			for(changey = 0; changey < rows; changey++) {
-				if(changey*cellsize < y &&
-						y <(changey+1)*cellsize) {
+				if(1 + changey*cellsize < y &&
+						y < 1 + (changey+1)*cellsize) {
 					break;
 				}
 			}
@@ -141,7 +141,7 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 		if((xlen/cols*rows)<ylen){ //yokoippai
 			cellsize = xlen/cols;
 			for(changex = 0; changex < cols; changex++) {
-				if(cellsize*changex < pushx && pushx <cellsize*(changex+1)) {
+				if(1+cellsize*changex < pushx && pushx < 1 + cellsize*(changex+1)) {
 					break;
 				}
 				if(changex == cols) {
@@ -149,8 +149,8 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 				}
 			}
 			for(changey = 0; changey < rows; changey++) {
-				if(changey*cellsize + (ylen-cellsize*rows)/2 < pushy &&
-						pushy <(changey+1)*cellsize + (ylen-cellsize*rows)/2) {
+				if(1 + changey*cellsize + (ylen-cellsize*rows)/2 < pushy &&
+						pushy < 1 + (changey+1)*cellsize + (ylen-cellsize*rows)/2) {
 					break;
 				}
 				if(changey == rows) {
@@ -163,8 +163,8 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 		}else {
 			cellsize = ylen/rows;
 			for(changex = 0; changex < cols; changex++) {
-				if(cellsize*changex + (xlen-cellsize*cols)/2 < pushx &&
-						pushx <cellsize*(changex+1) + (xlen-cellsize*cols)/2) {
+				if(1 + cellsize*changex + (xlen-cellsize*cols)/2 < pushx &&
+						pushx < 1 + cellsize*(changex+1) + (xlen-cellsize*cols)/2) {
 					break;
 				}
 				if(changex == cols) {
@@ -172,8 +172,8 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
 				}
 			}
 			for(changey = 0; changey < rows; changey++) {
-				if(changey*cellsize < pushy &&
-						pushy <(changey+1)*cellsize) {
+				if(1 + changey*cellsize < pushy &&
+						pushy < 1 + (changey+1)*cellsize) {
 					break;
 				}
 				if(changey == rows) {
