@@ -28,11 +28,11 @@ public class Main implements Runnable {
 		JFrame boardsizerows = new JFrame();
 		String rowsstr = JOptionPane.showInputDialog(boardsizerows,"rows");
 		if(rowsstr == null) {
+			JOptionPane.showMessageDialog(boardsizerows,"2<rows<25");
 			return;
 		}
 		int rows = Integer.parseInt(rowsstr);
 		if(rows<2 || rows>25) {
-			JOptionPane.showMessageDialog(boardsizerows,"2<rows<25");
 			return;
 		}
 		BoardModel model = new BoardModel(cols,rows);
